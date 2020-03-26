@@ -22,7 +22,7 @@ const RecipeList = ({ recipes }) => (
                 href={"https://tasty.co/topic/" + recipe.slug}
                
               >
-                Watch
+                Show
               </a>
             </td>
             <td>

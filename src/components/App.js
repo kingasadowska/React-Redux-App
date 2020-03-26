@@ -5,6 +5,8 @@ import AboutPage from "./about/AboutPage";
 import Header from "./common/Header";
 import PageNotFound from "./PageNotFound";
 import RecipesPage from "./recipes/RecipesPage";
+import ListWrapper from './chefWrapper/ChefWrapper';
+import '../index.css';
 
 function App() {
   return (
@@ -14,6 +16,7 @@ function App() {
         <Route exact path="/" component={HomePage} />
         <Route path="/about" component={AboutPage} />
         <Route path="/recipes" component={RecipesPage} />
+        <Route path="/wrapper" component={ListWrapper} />
         <Route component={PageNotFound} />
       </Switch>
     </div>

@@ -6,7 +6,7 @@ const HomePage = () => (
     <h1>Recipes</h1>
     <p>Try best recipes!</p>
     <Link to="about" className="btn btn-primary">
-      Learn more
+      See more
     </Link>
   </div>
 );

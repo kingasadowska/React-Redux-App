@@ -1,3 +1,5 @@
+@import url('ttps://fonts.googleapis.com/css?family=Montserrat:300,500,700'); 
+
 #app {
   max-width: 850px;
   margin: 0 auto;
@@ -5,4 +7,14 @@
 
 nav {
   padding: 20px 0 20px 0;
+}
+
+*, *::before, *::after {
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+    padding: 0;
+    font-family: 'Montserrat', sans-serif;
 }
