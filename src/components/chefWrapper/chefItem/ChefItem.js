@@ -1,5 +1,6 @@
 import React from 'react';
 import './ChefItem.css';
+import PropTypes from 'prop-types';
 
 const ChefItem = ({
     image,
@@ -27,6 +28,13 @@ const ChefItem = ({
                 </a>
         </div>
     </li>
+
 );
+ChefItem.propTypes = {
+    image: PropTypes.string.isRequired,
+    name: PropTypes.string.isRequired,
+    description: PropTypes.string,
+    link: PropTypes.string.isRequired,
+};
 
 export default ChefItem;
