@@ -1,7 +1,7 @@
 import React from 'react';
-import './ListItem.css';
+import './ChefItem.css';
 
-const ListItem = ({
+const ChefItem = ({
     image,
     name,
     description,
@@ -29,4 +29,4 @@ const ListItem = ({
     </li>
 );
 
-export default ListItem;
+export default ChefItem;

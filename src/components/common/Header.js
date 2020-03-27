@@ -13,14 +13,13 @@ const Header = () => {
         Recipes
       </NavLink>
       {" | "}
-      <NavLink to="/about" activeStyle={activeStyle}>
-        About
-      </NavLink>
-      {" | "}
       <NavLink to="/wrapper" activeStyle={activeStyle}>
         Chefs
       </NavLink>
-
+      {" | "}
+      <NavLink to="/ingredients" activeStyle={activeStyle}>
+        Ingredients
+      </NavLink>
     </nav>
   );
 };

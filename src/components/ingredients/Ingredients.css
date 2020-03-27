@@ -1,0 +1,23 @@
+
+.listItem__name {
+    margin: 0;
+    color: black;
+    font-weight: 500;
+    margin-bottom: 10px;
+    font-size: 20px;
+}
+
+.listItem__description {
+    margin: 10px 0 20px;
+    font-weight: 300;
+}
+
+.listItem__button {
+    font-size: 10px;
+    text-decoration: none;
+    padding: 7px 12px;
+    font-weight: 500;
+    background: none;
+    border: 2px solid #1E58FF;
+    color: #1E58FF;
+}
