@@ -4,6 +4,7 @@ import HomePage from "./home/HomePage";
 import Header from "./common/Header";
 import PageNotFound from "./PageNotFound";
 import RecipesPage from "./recipes/RecipesPage";
+import EditRecipePage from "./recipes/EditRecipePage";
 import ListWrapper from './chefWrapper/ChefWrapper';
 import Ingredients from "./ingredients/Ingredients";
 import '../index.css';
@@ -17,6 +18,8 @@ function App() {
         <Route path="/recipes" component={RecipesPage} />
         <Route path="/wrapper" component={ListWrapper} />
         <Route path="/ingredients" component={Ingredients} />
+        <Route path="/recipe/:slug" component={EditRecipePage} />
+        <Route path="/recipe" component={EditRecipePage} />
         <Route component={PageNotFound} />
       </Switch>
     </div>

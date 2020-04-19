@@ -45,7 +45,7 @@ server.use((req, res, next) => {
 });
 
 server.post("/recipes/", function(req, res, next) {
-  const error = validateCourse(req.body);
+  const error = validateRecipe(req.body);
   if (error) {
     res.status(400).send(error);
   } else {
@@ -73,7 +73,7 @@ function createSlug(value) {
     .toLowerCase();
 }
 
-function validateCourse(recipe) {
+function validateRecipe(recipe) {
   if (!recipe.title) return "Title is required.";
   if (!recipe.levelId) return "Level is required.";
   if (!recipe.category) return "Category is required.";

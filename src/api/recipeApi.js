@@ -7,7 +7,7 @@ export function getRecipes() {
     .catch(handleError);
 }
 
-export function saveCourse(recipe) {
+export function saveRecipe(recipe) {
   return fetch(baseUrl + (recipe.id || ""), {
     method: recipe.id ? "PUT" : "POST",
     headers: { "content-type": "application/json" },
@@ -17,7 +17,7 @@ export function saveCourse(recipe) {
     .catch(handleError);
 }
 
-export function deleteCourse(recipeId) {
+export function deleteRecipe(recipeId) {
   return fetch(baseUrl + recipeId, { method: "DELETE" })
     .then(handleResponse)
     .catch(handleError);
