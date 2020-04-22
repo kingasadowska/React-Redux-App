@@ -5,6 +5,7 @@ import * as levelActions from "../../redux/actions/levelActions";
 import PropTypes from "prop-types";
 import { bindActionCreators } from "redux";
 import RecipeList from "./RecipeList";
+import Spinner from "../common/Spinner";
 
 class RecipesPage extends React.Component {
   componentDidMount() {
@@ -28,6 +29,7 @@ class RecipesPage extends React.Component {
       <>
         <h2>Recipes</h2>
         <RecipeList recipes={this.props.recipes} />
+        <Spinner />
       </>
     );
   }
