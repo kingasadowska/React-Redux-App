@@ -5,9 +5,14 @@ import * as levelActions from "../../redux/actions/levelActions";
 import PropTypes from "prop-types";
 import { bindActionCreators } from "redux";
 import RecipeList from "./RecipeList";
+import { Redirect } from "react-router-dom";
 import Spinner from "../common/Spinner";
 
 class RecipesPage extends React.Component {
+  state = {
+    redirectToAddRecipePage: false
+  };
+
   componentDidMount() {
     const { recipes, levels, actions } = this.props;
 
@@ -26,14 +31,23 @@ class RecipesPage extends React.Component {
 
   render() {
     return (
-      <>
-        <h2>Recipes</h2>
-        <RecipeList recipes={this.props.recipes} />
-        <Spinner />
-      </>
-    );
-  }
-}
+          <>
+            {this.state.redirectToAddRecipePage && <Redirect to="/recipe" />}
+            <h2>Recipes</h2>
+
+            <button
+              style={{ marginBottom: 20 }}
+              className="btn btn-primary add-recipe"
+              onClick={() => this.setState({ redirectToAddRecipePage: true })}
+            >
+              Add Recipe
+            </button>
+
+            <RecipeList recipes={this.props.recipes} />
+          </>
+        );
+      }
+    }
 
 RecipesPage.propTypes = {
   levels: PropTypes.array.isRequired,

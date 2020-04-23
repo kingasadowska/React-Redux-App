@@ -1,16 +1,18 @@
 import React, { useEffect, useState } from "react";
 import { connect } from "react-redux";
-import { loadRecipes } from "../../redux/actions/recipeActions";
+import { loadRecipes, saveRecipe } from "../../redux/actions/recipeActions";
 import { loadLevels } from "../../redux/actions/levelActions";
 import PropTypes from "prop-types";
 import RecipeForm from "./RecipeForm";
 import { newRecipe } from "../../../tools/mockData";
 
-function EditRecipePage({
+function ManageRecipePage({
   recipes,
   levels,
   loadLevels,
   loadRecipes,
+  saveRecipe,
+  history,
   ...props
 }) {
   const [recipe, setRecipe] = useState({ ...props.recipe });
@@ -32,21 +34,39 @@ function EditRecipePage({
     }
   }, [props.recipe]);
 
+  function handleChange(event) {
+    const { name, value } = event.target;
+    setRecipe(prevRecipe => ({
+      ...prevRecipe,
+      [name]: name === "levelId" ? parseInt(value, 10) : value
+    }));
+  }
+
+  function handleSave(event) {
+    event.preventDefault();
+    saveRecipe(recipe).then(() => {
+      history.push("/recipes");
+    });
+  }
+
   return (
     <RecipeForm
       recipe={recipe}
       errors={errors}
       levels={levels}
+      onChange={handleChange}
+      onSave={handleSave}
     />
   );
 }
 
-EditRecipePage.propTypes = {
+ManageRecipePage.propTypes = {
   recipe: PropTypes.object.isRequired,
   levels: PropTypes.array.isRequired,
   recipes: PropTypes.array.isRequired,
   loadRecipes: PropTypes.func.isRequired,
   loadLevels: PropTypes.func.isRequired,
+  saveRecipe: PropTypes.func.isRequired,
   history: PropTypes.object.isRequired
 };
 
@@ -70,9 +90,10 @@ function mapStateToProps(state, ownProps) {
 const mapDispatchToProps = {
   loadRecipes,
   loadLevels,
+  saveRecipe
 };
 
 export default connect(
   mapStateToProps,
   mapDispatchToProps
-)(EditRecipePage);
+)(ManageRecipePage);
