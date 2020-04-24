@@ -1,4 +1,5 @@
 export default {
   recipes: [],
-  levels: []
+  levels: [],
+  apiCallsInProgress: 0
 };

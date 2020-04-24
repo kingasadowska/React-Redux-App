@@ -1,5 +1,6 @@
 import * as types from "./actionTypes";
 import * as recipeApi from "../../api/recipeApi";
+import { beginApiCall } from "./apiStatusActions";
 
 export function loadRecipeSuccess(recipes) {
   return { type: types.LOAD_RECIPES_SUCCESS, recipes };
@@ -15,6 +16,7 @@ export function updateRecipeSuccess(recipe) {
 
 export function loadRecipes() {
   return function(dispatch) {
+    dispatch(beginApiCall());
     return recipeApi
       .getRecipes()
       .then(recipes => {
@@ -29,6 +31,7 @@ export function loadRecipes() {
 export function saveRecipe(recipe) {
   //eslint-disable-next-line no-unused-vars
   return function(dispatch, getState) {
+    dispatch(beginApiCall());
     return recipeApi
       .saveRecipe(recipe)
       .then(savedRecipe => {

@@ -34,7 +34,10 @@ class RecipesPage extends React.Component {
           <>
             {this.state.redirectToAddRecipePage && <Redirect to="/recipe" />}
             <h2>Recipes</h2>
-
+            {this.props.loading ? (
+            <Spinner />
+          ) : (
+          <>
             <button
               style={{ marginBottom: 20 }}
               className="btn btn-primary add-recipe"
@@ -45,14 +48,17 @@ class RecipesPage extends React.Component {
 
             <RecipeList recipes={this.props.recipes} />
           </>
-        );
-      }
-    }
+        )}
+      </>
+    );
+  }
+}
 
 RecipesPage.propTypes = {
   levels: PropTypes.array.isRequired,
   recipes: PropTypes.array.isRequired,
-  actions: PropTypes.object.isRequired
+  actions: PropTypes.object.isRequired,
+  loading: PropTypes.bool.isRequired
 };
 
 function mapStateToProps(state) {

@@ -5,6 +5,7 @@ import { loadLevels } from "../../redux/actions/levelActions";
 import PropTypes from "prop-types";
 import RecipeForm from "./RecipeForm";
 import { newRecipe } from "../../../tools/mockData";
+import Spinner from "../common/Spinner";
 
 function ManageRecipePage({
   recipes,
@@ -49,7 +50,9 @@ function ManageRecipePage({
     });
   }
 
-  return (
+  return levels.length === 0 || recipes.length === 0 ? (
+    <Spinner />
+  ) : (
     <RecipeForm
       recipe={recipe}
       errors={errors}
