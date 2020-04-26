@@ -6,6 +6,7 @@ import PropTypes from "prop-types";
 import RecipeForm from "./RecipeForm";
 import { newRecipe } from "../../../tools/mockData";
 import Spinner from "../common/Spinner";
+import { toast } from "react-toastify";
 
 function ManageRecipePage({
   recipes,
@@ -18,6 +19,7 @@ function ManageRecipePage({
 }) {
   const [recipe, setRecipe] = useState({ ...props.recipe });
   const [errors, setErrors] = useState({});
+  const [saving, setSaving] = useState(false);
 
   useEffect(() => {
     if (recipes.length === 0) {
@@ -45,7 +47,9 @@ function ManageRecipePage({
 
   function handleSave(event) {
     event.preventDefault();
+    setSaving(true);
     saveRecipe(recipe).then(() => {
+      toast.success("Recipe saved!")
       history.push("/recipes");
     });
   }
@@ -59,6 +63,7 @@ function ManageRecipePage({
       levels={levels}
       onChange={handleChange}
       onSave={handleSave}
+      saving={saving}
     />
   );
 }

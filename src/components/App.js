@@ -8,6 +8,8 @@ import EditRecipePage from "./recipes/EditRecipePage";
 import ListWrapper from './chefWrapper/ChefWrapper';
 import Ingredients from "./ingredients/Ingredients";
 import '../index.css';
+import { ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 function App() {
   return (
@@ -22,6 +24,7 @@ function App() {
         <Route path="/recipe" component={EditRecipePage} />
         <Route component={PageNotFound} />
       </Switch>
+      <ToastContainer autoClose={2000} hideProgressBar />
     </div>
   );
 }
