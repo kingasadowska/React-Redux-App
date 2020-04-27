@@ -45,10 +45,24 @@ function ManageRecipePage({
     }));
   }
 
+  function formIsValid() {
+    const { title, levelId, category } = recipe;
+    const errors = {};
+
+    if (!title) errors.title = "Title is required!";
+    if (!levelId) errors.level = "Level is reqiured!";
+    if (!category) errors.category = "Category is reqiured!";
+
+    setErrors(errors);
+    return Object.keys(errors).length === 0;
+  }
+
   function handleSave(event) {
     event.preventDefault();
+    if (!formIsValid()) return;
     setSaving(true);
-    saveRecipe(recipe).then(() => {
+    saveRecipe(recipe)
+    .then(() => {
       toast.success("Recipe saved!")
       history.push("/recipes");
     }).catch(error => {
