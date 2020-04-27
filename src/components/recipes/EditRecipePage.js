@@ -51,6 +51,9 @@ function ManageRecipePage({
     saveRecipe(recipe).then(() => {
       toast.success("Recipe saved!")
       history.push("/recipes");
+    }).catch(error => {
+      setSaving(false);
+      setErrors({onSave: error.message});
     });
   }
 

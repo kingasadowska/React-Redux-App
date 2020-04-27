@@ -1,6 +1,6 @@
 import * as types from "./actionTypes";
 import * as recipeApi from "../../api/recipeApi";
-import { beginApiCall } from "./apiStatusActions";
+import { beginApiCall, apiCallError } from "./apiStatusActions";
 
 export function loadRecipeSuccess(recipes) {
   return { type: types.LOAD_RECIPES_SUCCESS, recipes };
@@ -23,6 +23,7 @@ export function loadRecipes() {
         dispatch(loadRecipeSuccess(recipes));
       })
       .catch(error => {
+        dispatch(apiCallError(error));
         throw error;
       });
   };
@@ -40,6 +41,7 @@ export function saveRecipe(recipe) {
           : dispatch(createRecipeSuccess(savedRecipe));
       })
       .catch(error => {
+        dispatch(apiCallError(error));
         throw error;
       });
   };
