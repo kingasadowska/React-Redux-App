@@ -2,7 +2,7 @@ import React from "react";
 import PropTypes from "prop-types";
 import { Link } from "react-router-dom";
 
-const RecipeList = ({ recipes }) => (
+const RecipeList = ({ recipes, onDeleteClick }) => (
   <table className="table">
     <thead>
       <tr>
@@ -10,6 +10,7 @@ const RecipeList = ({ recipes }) => (
         <th>Title</th>
         <th>Level</th>
         <th>Category</th>
+        <th />
       </tr>
     </thead>
     <tbody>
@@ -20,9 +21,7 @@ const RecipeList = ({ recipes }) => (
               <a
                 className="btn btn-light"
                 href={"https://tasty.co/topic/" + recipe.slug}
-               
-              >
-                Show
+              >Show
               </a>
             </td>
             <td>
@@ -30,6 +29,14 @@ const RecipeList = ({ recipes }) => (
             </td>
             <td>{recipe.levelName}</td>
             <td>{recipe.category}</td>
+            <td>
+              <button
+                className="btn btn-outline-danger"
+                onClick={() => onDeleteClick(recipe)}
+              >
+                Delete
+              </button>
+            </td>
           </tr>
         );
       })}
@@ -38,7 +45,8 @@ const RecipeList = ({ recipes }) => (
 );
 
 RecipeList.propTypes = {
-  recipes: PropTypes.array.isRequired
+  recipes: PropTypes.array.isRequired,
+  onDeleteClick: PropTypes.func.isRequired
 };
 
 export default RecipeList;

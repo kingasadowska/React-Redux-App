@@ -14,6 +14,10 @@ export function updateRecipeSuccess(recipe) {
   return { type: types.UPDATE_RECIPE_SUCCESS, recipe };
 }
 
+export function deleteRecipeOptimistic(recipe) {
+  return { type: types.DELETE_RECIPE_OPTIMISTIC, recipe };
+}
+
 export function loadRecipes() {
   return function(dispatch) {
     dispatch(beginApiCall());
@@ -44,5 +48,12 @@ export function saveRecipe(recipe) {
         dispatch(apiCallError(error));
         throw error;
       });
+  };
+}
+
+export function deleteRecipe(recipe) {
+  return function (dispatch) {
+    dispatch(deleteRecipeOptimistic(recipe));
+    return recipeApi.deleteRecipe(recipe.id);
   };
 }

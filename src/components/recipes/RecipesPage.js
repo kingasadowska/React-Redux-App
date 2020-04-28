@@ -7,6 +7,7 @@ import { bindActionCreators } from "redux";
 import RecipeList from "./RecipeList";
 import { Redirect } from "react-router-dom";
 import Spinner from "../common/Spinner";
+import { toast } from "react-toastify";
 
 class RecipesPage extends React.Component {
   state = {
@@ -29,14 +30,23 @@ class RecipesPage extends React.Component {
     }
   }
 
+  handleDeleteRecipe = async recipe => {
+    toast.success("Recipe deleted");
+    try {
+      await this.props.actions.deleteRecipe(recipe);
+    } catch (error) {
+      toast.error("Delete failed. " + error.message, { autoClose: false });
+    }
+  };
+
   render() {
     return (
-          <>
-            {this.state.redirectToAddRecipePage && <Redirect to="/recipe" />}
-            <h2>Recipes</h2>
-            {this.props.loading ? (
-            <Spinner />
-          ) : (
+      <>
+        {this.state.redirectToAddRecipePage && <Redirect to="/recipe" />}
+        <h2>Recipes</h2>
+        {this.props.loading ? (
+          <Spinner />
+        ) : (
           <>
             <button
               style={{ marginBottom: 20 }}
@@ -46,7 +56,10 @@ class RecipesPage extends React.Component {
               Add Recipe
             </button>
 
-            <RecipeList recipes={this.props.recipes} />
+            <RecipeList
+              onDeleteClick={this.handleDeleteRecipe}
+              recipes={this.props.recipes}
+            />
           </>
         )}
       </>
@@ -72,7 +85,8 @@ function mapStateToProps(state) {
               levelName: state.levels.find(a => a.id === recipe.levelId).name
             };
           }),
-    levels: state.levels
+    levels: state.levels,
+    loading: state.apiCallsInProgress > 0
   };
 }
 
@@ -80,9 +94,13 @@ function mapDispatchToProps(dispatch) {
   return {
     actions: {
       loadRecipes: bindActionCreators(recipeActions.loadRecipes, dispatch),
-      loadLevels: bindActionCreators(levelActions.loadLevels, dispatch)
+      loadLevels: bindActionCreators(levelActions.loadLevels, dispatch),
+      deleteRecipe: bindActionCreators(recipeActions.deleteRecipe, dispatch)
     }
   };
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(RecipesPage);
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(RecipesPage);
